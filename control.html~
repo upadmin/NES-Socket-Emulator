@@ -1,0 +1,10 @@
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var socket = io.connect('/');
+    function buttonDown(button) {
+        socket.emit('buttonPressed', button, 'down');
+    }
+    function buttonUp(button) {
+        socket.emit('buttonPressed', button, 'up');
+    }
+</script>
