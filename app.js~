@@ -8,7 +8,8 @@ app.get('/', function (req, res) {
     res.sendfile(__dirname + '/index.html');
 });
 app.get('/controller', function (req, res) {
-    res.sendfile(__dirname + '/control.html');
+    res.sendfile(__dirname + '/controller.html');
+}
 
 io.sockets.on('connection', function (socket) {
     socket.on('buttonPress', function(button, press) {

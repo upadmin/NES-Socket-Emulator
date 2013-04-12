@@ -9,6 +9,7 @@ app.get('/', function (req, res) {
 });
 app.get('/controller', function (req, res) {
     res.sendfile(__dirname + '/controller.html');
+});
 
 io.sockets.on('connection', function (socket) {
     socket.on('buttonPress', function(button, press) {
