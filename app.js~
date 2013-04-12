@@ -4,7 +4,7 @@ var express = require('express')
   , io = require('socket.io').listen(server);
 
   server.listen(3000);
-  app.use('assets/', express.static('assets'));
+  app.use('/assets/', express.static('assets'));
 
 
   app.get('/', function (req, res) {
