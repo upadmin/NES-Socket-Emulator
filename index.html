@@ -1,59 +1,9 @@
-<!-- this is where the emulator is -->
-<script src="/socket.io/socket.io.js"></script>
-<script>
-    var socket = io.connect('/');
-    socket.on('buttonUpdate', function(button, press) {
-        var keyboardEvent = document.createEvent('KeyboardEvent');
-        var initMethod = typeof keyboardEvent.iniKeyboardEvent !== 'undefined' ?
-        "initKeyboardEvent" : "initKeyEvent";
-        var action, key;
-        if (press == 'down') {
-            action = "keydown";
-        }
-        else action = "keyup";
-        if (button == 'A') {
-            key = 55;
-        }
-        else if (button == 'B') {
-            key = 57;
-        }
-        else if (button == 'SELECT') {
-            key = 49;
-        }
-        else if (button == 'START') {
-            key = 51;
-        }
-        else if (button == 'UP') {
-            key = 56;
-        }
-        else if (button == 'DOWN') {
-            key = 50;
-        }
-        else if (button == 'LEFT') {
-            key = 52;
-        }
-        else if (button == 'RIGHT') {
-            key = 54;
-        }
-
-        keyboardEvent[initMethod] (
-        action,
-        true,
-        true,
-        window,
-        false,
-        false,
-        false,
-        false,
-        key,
-        0
-        );
-        document.dispatchEvent(keyboardEvent);
-
-    });
-    <script>
-        <script src="assets/emulator/lib/jquery-1.4.2.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="assets/emulator/lib/dynamicaudio-min.js" type="text/javascript" charset="utf-8"></script>
+<!DOCTYPE html>
+<html>
+    <body>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="/assets/lib/jquery-1.4.2.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/assets/lib/dynamicaudio-min.js" type="text/javascript" charset="utf-8"></script>
         <script src="assets/emulator/source/nes.js" type="text/javascript" charset="utf-8"></script>
         <script src="assets/emulator/source/utils.js" type="text/javascript" charset="utf-8"></script>
         <script src="assets/emulator/source/cpu.js" type="text/javascript" charset="utf-8"></script>
@@ -64,43 +14,95 @@
         <script src="assets/emulator/source/rom.js" type="text/javascript" charset="utf-8"></script>
         <script src="assets/emulator/source/ui.js" type="text/javascript" charset="utf-8"></script>
         <script type="text/javascript" charset="utf-8">
-            var nes;
-            $(function() {
-                    nes = new JSNES({
-                        'ui': $('#emulator').JSNESUI({
-                            "Homebrew": [
-                            ['Concentration Room', 'roms/croom/croom.nes'],
-                            ['LJ65', 'roms/lj65/lj65.nes'],
-                            ],
-                            "Working": [
-                            ['Bubble Bobble', 'local-roms/Bubble Bobble (U).nes'],
+            var socket = io.connect('/');
+            socket.on('buttonUpdate', function(button, press) {
+                    var keyboardEvent = document.createEvent('KeyboardEvent');
+                    var initMethod = typeof keyboardEvent.iniKeyboardEvent !== 'undefined' ?
+                    "initKeyboardEvent" : "initKeyEvent";
+                    var action, key;
+                    if (press == 'down') {
+                    action = "keydown";
+                    }
+                    else action = "keyup";
+                    if (button == 'A') {
+                    key = 55;
+                    }
+                    else if (button == 'B') {
+                    key = 57;
+                    }
+                    else if (button == 'SELECT') {
+                    key = 49;
+                    }
+                    else if (button == 'START') {
+                    key = 51;
+                    }
+                    else if (button == 'UP') {
+                        key = 56;
+                    }
+                    else if (button == 'DOWN') {
+                        key = 50;
+                    }
+                    else if (button == 'LEFT') {
+                        key = 52;
+                    }
+                    else if (button == 'RIGHT') {
+                        key = 54;
+                    }
 
-                            ['Contra', 'local-roms/Contra (U) [!].nes'],
-                            ['Donkey Kong', 'local-roms/Donkey Kong (JU).nes'],
-                            ['Dr. Mario', 'local-roms/Dr. Mario (JU).nes'],
-                            ['Golf', 'local-roms/Golf (JU).nes'],
-                            ['The Legend of Zelda', 'local-roms/Legend of Zelda, The (U) (PRG1).nes'],
-                            ['Lemmings', 'local-roms/Lemmings (U).nes'],
-                            ['Lifeforce', 'local-roms/Lifeforce (U).nes'],
+                    keyboardEvent[initMethod] (
+                            action,
+                            true,
+                            true,
+                            window,
+                            false,
+                            false,
+                            false,
+                            false,
+                            key,
+                            0
+                            );
+                    document.dispatchEvent(keyboardEvent);
 
-                            ['Mario Bros.', 'local-roms/Mario Bros. (JU) [!].nes'],
-                            ['Mega Man', 'local-roms/Mega Man (U).nes'],
-                            ['Pac-Man', 'local-roms/Pac-Man (U) [!].nes'],
-                            ['Super Mario Bros.', 'local-roms/Super Mario Bros. (JU) (PRG0) [!].nes'],
-                            ['Tennis', 'local-roms/Tennis (JU) [!].nes'],
-                            ['Tetris', 'local-roms/Tetris (U) [!].nes'],
-                            ['Tetris 2', 'local-roms/Tetris 2 (U) [!].nes'],
-                            ['Zelda II - The Adventure of Link', 'local-roms/Zelda II - The Adventure of Link (U).nes']
-                                ],
-
-                            "Nearly Working": [
-                                ['Duck Hunt', 'local-roms/Duck Hunt (JUE) [!].nes'],
-                            ['Super Mario Bros. 3', 'local-roms/Super Mario Bros. 3 (U) (PRG1) [!].nes']
-                                ]
-                        })
-                    });
             });
+var nes;
+(function() {
+ nes = new JSNES({
+     'ui': $('#emulator').JSNESUI({
+         "Homebrew": [
+         ['Concentration Room', 'roms/croom/croom.nes'],
+         ['LJ65', 'roms/lj65/lj65.nes'],
+         ],
+         "Working": [
+         ['Bubble Bobble', 'local-roms/Bubble Bobble (U).nes'],
+
+         ['Contra', 'local-roms/Contra (U) [!].nes'],
+         ['Donkey Kong', 'local-roms/Donkey Kong (JU).nes'],
+         ['Dr. Mario', 'local-roms/Dr. Mario (JU).nes'],
+         ['Golf', 'local-roms/Golf (JU).nes'],
+         ['The Legend of Zelda', 'local-roms/Legend of Zelda, The (U) (PRG1).nes'],
+         ['Lemmings', 'local-roms/Lemmings (U).nes'],
+         ['Lifeforce', 'local-roms/Lifeforce (U).nes'],
+
+         ['Mario Bros.', 'local-roms/Mario Bros. (JU) [!].nes'],
+         ['Mega Man', 'local-roms/Mega Man (U).nes'],
+         ['Pac-Man', 'local-roms/Pac-Man (U) [!].nes'],
+         ['Super Mario Bros.', 'local-roms/Super Mario Bros. (JU) (PRG0) [!].nes'],
+         ['Tennis', 'local-roms/Tennis (JU) [!].nes'],
+         ['Tetris', 'local-roms/Tetris (U) [!].nes'],
+         ['Tetris 2', 'local-roms/Tetris 2 (U) [!].nes'],
+         ['Zelda II - The Adventure of Link', 'local-roms/Zelda II - The Adventure of Link (U).nes']
+             ],
+
+         "Nearly Working": [
+             ['Duck Hunt', 'local-roms/Duck Hunt (JUE) [!].nes'],
+         ['Super Mario Bros. 3', 'local-roms/Super Mario Bros. 3 (U) (PRG1) [!].nes']
+             ]
+     })
+ });
+});
 </script>
 <!--[if IE]>
 <script type="text/vbscript" src="source/jsnes-ie-hacks.vbscript"></script>
 <![endif]-->
+</body>
+</html>
