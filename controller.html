@@ -7,22 +7,52 @@
       var socket = io.connect('/');
 
       var sendData = function(button, state) {
-        socket.emit('controllerData', button, state);
+        console.log(button + ' is ' + state);
+        socket.emit('buttonPress', button, state);
       };
 
-      socket.on('news', function (data) {
-        console.log(data);
-        socket.emit('my other event', { my: 'data' });
-      });
+/*      function absorbEvent_(event) {*/
+/*        var e = event || window.event;*/
+/*        e.preventDefault && e.preventDefault();*/
+/*        e.stopPropagation && e.stopPropagation();*/
+/*        e.cancelBubble = true;*/
+/*        e.returnValue = false;*/
+/*        return false;*/
+/*      }*/
+/**/
+/*      function preventLongPressMenu(node) {*/
+/*        node.ontouchstart = node.on('vmousedown'click;*/
+/*        //node.ontouchmove = absorbEvent_;*/
+/*        node.ontouchend = absorbEvent_;*/
+/*        //node.ontouchcancel = absorbEvent_;*/
+/*      }*/
+
+/*      function init() {*/
+/*        preventLongPressMenu(document.getElementById('theimage'));*/
+/*      }*/
     </script>
+
+    <style type="">
+      <!--
+      body {
+      background-image: url(assets/controller.png);
+      background-repeat: no-repeat;
+      height: 100%;
+      width: 100%;
+      background-position: bottom;
+      }
+      //-->
+    </style>
+
+
   </head>
 
   <body>
-    <div style="text-align:center; width:247px; margin-left:auto; margin-right:auto;">
+<!--    <div style="text-align:center; width:247px; margin-left:auto; margin-right:auto;">
       <img id="Image-Maps_1201304111749564" src="/assets/controller.png" usemap="#Image-Maps_1201304111749564" border="0" width="247" height="600" alt="" />
       <map id="_Image-Maps_1201304111749564" name="Image-Maps_1201304111749564">
-        <area id="a" shape="rect" coords="140,66,207,136" alt="abutton" title="abutton"/>
-        <area id="b" shape="rect" coords="140,66,207,136"  alt="abutton" title="abutton"/>
+        <area id="a" onclick=sendData ('a', 'down')  shape="rect" coords="140,66,207,136" alt="abutton" title="abutton"/>
+        <area id="b" shape="rect" coords="140,200,207,136"  alt="abutton" title="abutton"/>
         <area id="start" shape="rect" coords="150,242,202,312" alt="start" title="start"/>
         <area id="select" shape="rect" coords="148,330,200,400" alt="select" title="select"/>
         <area id="right" shape="rect" coords="128,445,162,479" alt="right" title="right"/>
@@ -31,7 +61,7 @@
         <area id="left" shape="rect" coords="128,521,162,555" alt="left" title="left"/>
       </map>
     </div>
-
+    -->
     <script>
       $('area#a').on('vmousedown', document, (function() {
         sendData('a', 'down');
@@ -97,4 +127,5 @@
         sendData('right', 'down');
       }));
     </script>
-  </html>
+  </body>
+</html>
