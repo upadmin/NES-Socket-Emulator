@@ -6,6 +6,7 @@ var express = require('express')
   server.listen(3000);
   console.log('running on 3000');
   app.use('/assets/', express.static('assets'));
+  app.use('/', express.static('.'));
 
   app.get('/', function (req, res) {
     res.sendfile(__dirname + '/index.html');
